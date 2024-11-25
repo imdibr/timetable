@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timetable Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='homepage.css') }}">
+</head>
+<body>
+
+    <!-- Header Section -->
+    <div class="header">
+        <h1>Timetable Generator</h1>
+    </div>
+
+    <!-- Main Content Container -->
+    <div class="container">
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <h2>Upload your Excel file</h2>
+            <div class="file-upload">
+                <label for="file">Select an Excel file (.xlsx):</label>
+                <input type="file" name="file" id="file" accept=".xlsx">
+            </div>
+            <button type="submit" class="submit-btn">Upload</button>
+        </form>
+
+        <!-- Success and Error Messages -->
+        {% if error %}
+        <div class="error-message">
+            <p>{{ error }}</p>
+        </div>
+        {% endif %}
+
+        {% if success %}
+        <div class="success-message">
+            <p>{{ success }}</p>
+        </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>
