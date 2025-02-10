@@ -28,5 +28,7 @@ This project is a **Timetable Generator** designed specifically for the **Depart
 - **Certifications:** AWS, Data Science
 - **Global Electives:** Finance, Psychology
 - **Open Electives:** Cybersecurity, Blockchain
+  
+![Screenshot 2025-02-10 at 11 39 29 AM](https://github.com/user-attachments/assets/b34b4165-13f5-4ad8-a645-55b4ece9728b)
 
 
