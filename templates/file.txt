@@ -1,0 +1,39 @@
+import the neccessary libraries
+
+function input xlsx file:
+    input the xlsx file
+    write the xlsx file into a dataframe
+
+function generate timetable:
+    create a 2x2 matrix for all the 9 different sections(2 years so 18 sections)
+    the matrix should have days as the row and period number as the column
+
+    each matrix should have variable name for each class like 2btcsa for section 2nd year 2 btcs a
+
+    for each of the matrix set the fixed values like this 
+    locked_classes = {
+    "Monday": ["Period 4"],
+    "Tuesday": ["Period 5", "Period 6"],
+    "Friday": ["Period 5", "Period 6"],
+    "Saturday": ["Period 5", "Period 6"],
+}
+
+function add lab sessions:
+    now that the fixed classes are alloted append the neccessary classes to the array of indvidaual classes
+    these are the different column values int the dataframe Subject Name, Teacher Name, 
+    Year Name	Elective, Class Status, Class Name and so on
+    from the dataframe check the year of the class and the class name and append them to the designated matrix
+    once you reach the designated matrix check for the available slots to put the practical classes
+    do this for all the 18 sections in one loop
+    every matrix go through the whole length of the dataframe and append it
+
+function print the xlsx file:
+    now that all the matrix have been matrixized write the xlsx file for two year
+    the final output should be the two xlsx file:
+        Download 2nd Year Timetable
+        Download 3rd Year Timetable
+    for each matrix put the 9 sections in one file and the next 9 in the second file
+
+
+rest all handle the flask app createion and the html file connection to index.html
+

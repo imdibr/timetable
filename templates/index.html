@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christ University Timetable Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+        h2 {
+            color: #333;
+        }
+        input[type="file"] {
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .hidden {
+            display: none;
+        }
+        .output {
+            margin-top: 20px;
+            padding: 15px;
+            background: #eaf7ea;
+            border-radius: 5px;
+            color: #2d7d2d;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>📅 Christ University Timetable Generator</h2>
+        <p>Enter the Excel (.xlsx) file for timetable generation:</p>
+        
+        <!-- File Upload Input -->
+        <input type="file" id="fileInput" accept=".xlsx">
+        
+        <!-- Upload Button -->
+        <button onclick="uploadFile()">Generate Timetable</button>
+
+        <!-- Output message -->
+        <div id="output" class="hidden"></div>
+    </div>
+
+    <script>
+        function uploadFile() {
+            const fileInput = document.getElementById("fileInput");
+            const outputDiv = document.getElementById("output");
+
+            if (!fileInput.files.length) {
+                alert("⚠️ Please select an Excel (.xlsx) file.");
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const formData = new FormData();
+            formData.append("file", file);
+
+            // Send file to Flask backend
+            fetch("/upload", { method: "POST", body: formData })
+                .then(response => response.text())
+                .then(data => {
+                    outputDiv.innerHTML = data;
+                    outputDiv.classList.remove("hidden");
+                })
+                .catch(error => {
+                    outputDiv.innerHTML = "❌ Error processing file.";
+                    outputDiv.classList.remove("hidden");
+                });
+        }
+    </script>
+</body>
+</html>

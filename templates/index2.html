@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christ University Timetable Generator</title>
+    <style>
+        body {
+            background-color: white;
+            font-family: Arial, sans-serif;
+            color: #003366;
+            text-align: center;
+        }
+        .container {
+            width: 60%;
+            margin: auto;
+            padding: 20px;
+            border: 2px solid #003366;
+            border-radius: 10px;
+            background-color: #f0f8ff;
+        }
+        button {
+            background-color: #003366;
+            color: white;
+            padding: 10px;
+            border: none;
+            margin: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #00509e;
+        }
+    </style>
+</head>
+<body>
+    <h1>Christ University Timetable Generator</h1>
+    <div class="container">
+        <h2>Upload Timetable File (XLSX Only)</h2>
+        <input type="file" id="xlsxFile" accept=".xlsx">
+    </div>
+    
+    <div class="container">
+        <h2>Second Year Timetable</h2>
+        <label>HED Class:</label>
+        <input type="text" id="hedClass">
+        <br>
+        <button>Choose Day</button>
+        <button>Choose Period</button>
+    </div>
+    
+    <div class="container">
+        <h2>Third Year Timetable</h2>
+        <label>Program Elective Classes:</label>
+        <input type="text" id="programElectives">
+        <br>
+        <label>Semester:</label>
+        <select id="semester">
+            <option value="even">Even</option>
+            <option value="odd">Odd</option>
+        </select>
+        <br>
+        <div id="electiveOptions"></div>
+        <br>
+        <button>Choose Day</button>
+        <button>Choose Period</button>
+    </div>
+    
+    <div class="container">
+        <h2>Download Timetables</h2>
+        <button>Download First Year Timetable</button>
+        <button>Download Second Year Timetable</button>
+    </div>
+    
+    <script>
+        document.getElementById('semester').addEventListener('change', function() {
+            let electiveDiv = document.getElementById('electiveOptions');
+            electiveDiv.innerHTML = '';
+            if (this.value === 'even') {
+                electiveDiv.innerHTML = '<label>Global Elective Classes:</label> <input type="text">';
+            } else {
+                electiveDiv.innerHTML = '<label>Open Elective Classes:</label> <input type="text">';
+            }
+        });
+    </script>
+</body>
+</html>
