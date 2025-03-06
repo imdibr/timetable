@@ -1,0 +1,16 @@
+from tkinter import *
+from tkinter import filedialog
+import pandas as pd
+root = Tk()
+menubar = Menu(root)
+root.config(menu= menubar)
+subMenu = Menu(menubar, tearoff=0)
+def browse_file():
+    global filename
+    filename = filedialog.askopenfilename()
+menubar.add_cascade(label="File", menu =subMenu)
+subMenu.add_command(label="Open", command=browse_file)
+root.geometry("600x600")
+root.mainloop()
+df = pd.read_excel(filename)
+print(df)

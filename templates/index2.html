@@ -6,81 +6,302 @@
     <title>Christ University Timetable Generator</title>
     <style>
         body {
-            background-color: white;
             font-family: Arial, sans-serif;
-            color: #003366;
-            text-align: center;
+            background-color: white;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #0078D7;
         }
         .container {
-            width: 60%;
-            margin: auto;
-            padding: 20px;
-            border: 2px solid #003366;
-            border-radius: 10px;
-            background-color: #f0f8ff;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        input[type="file"], select, button, input[type="text"] {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #0078D7;
+            border-radius: 5px;
+            font-size: 16px;
         }
         button {
-            background-color: #003366;
+            background-color: #0078D7;
             color: white;
-            padding: 10px;
-            border: none;
-            margin: 5px;
             cursor: pointer;
         }
         button:hover {
-            background-color: #00509e;
+            background-color: #005bb5;
+        }
+        .output-section {
+            margin-top: 20px;
+        }
+        .output-section a {
+            color: #0078D7;
+            text-decoration: none;
+        }
+        .output-section a:hover {
+            text-decoration: underline;
+        }
+        .hidden {
+            display: none;
         }
     </style>
 </head>
 <body>
-    <h1>Christ University Timetable Generator</h1>
     <div class="container">
-        <h2>Upload Timetable File (XLSX Only)</h2>
-        <input type="file" id="xlsxFile" accept=".xlsx">
-    </div>
-    
-    <div class="container">
+        <h1>Christ University Timetable Generator</h1>
+
+        <!-- File Upload Section -->
+        <h2>Upload Timetable File</h2>
+        <input type="file" id="timetableFile" accept=".xlsx" required>
+
+        <!-- Second Year Timetable Section -->
         <h2>Second Year Timetable</h2>
-        <label>HED Class:</label>
-        <input type="text" id="hedClass">
-        <br>
-        <button>Choose Day</button>
-        <button>Choose Period</button>
-    </div>
-    
-    <div class="container">
+        <div>
+            <label for="day">Select Day for HED classes:</label>
+            <select id="day" name="day">
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
+            </select>
+            <label for="period">Select Period:</label>
+            <select id="period" name="period">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+            </select>
+            <button>Add Class</button>
+        </div>
+
+        <!-- Third Year Timetable Section -->
         <h2>Third Year Timetable</h2>
-        <label>Program Elective Classes:</label>
-        <input type="text" id="programElectives">
-        <br>
-        <label>Semester:</label>
-        <select id="semester">
-            <option value="even">Even</option>
-            <option value="odd">Odd</option>
-        </select>
-        <br>
-        <div id="electiveOptions"></div>
-        <br>
-        <button>Choose Day</button>
-        <button>Choose Period</button>
+        <div>
+            <label for="semester">Select Semester:</label>
+            <select id="semester" name="semester" onchange="toggleElectiveOptions()">
+                <option value="even">Even</option>
+                <option value="odd">Odd</option>
+            </select>
+        </div>
+
+        <!-- Global Elective Section (Even Semester) -->
+        <div id="evenSemesterOptions">
+            <h3>Global Elective</h3>
+            <div>
+                <label for="globalDay">Select Day:</label>
+                <select id="globalDay" name="globalDay">
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
+                </select>
+                <label for="globalPeriod">Select Period:</label>
+                <select id="globalPeriod" name="globalPeriod">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select>
+                <button>Add Global Elective</button>
+            </div>
+        </div>
+
+        <!-- Open Elective Sections (Odd Semester) -->
+        <div id="oddSemesterOptions" class="hidden">
+            <h3>Open Elective Class 1</h3>
+            <div>
+                <label for="openDay1">Select Day:</label>
+                <select id="openDay1" name="openDay1">
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
+                </select>
+                <label for="openPeriod1">Select Period:</label>
+                <select id="openPeriod1" name="openPeriod1">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select>
+                <button>Add Open Elective</button>
+            </div>
+
+            <h3>Open Elective Class 2</h3>
+            <div>
+                <label for="openDay2">Select Day:</label>
+                <select id="openDay2" name="openDay2">
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
+                </select>
+                <label for="openPeriod2">Select Period:</label>
+                <select id="openPeriod2" name="openPeriod2">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select>
+                <button>Add Open Elective</button>
+            </div>
+
+            <h3>Open Elective Class 3</h3>
+            <div>
+                <label for="openDay3">Select Day:</label>
+                <select id="openDay3" name="openDay3">
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
+                </select>
+                <label for="openPeriod3">Select Period:</label>
+                <select id="openPeriod3" name="openPeriod3">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select>
+                <button>Add Open Elective</button>
+            </div>
+        </div>
+
+        <!-- Program Elective Section (Default for Third Year) -->
+        <div>
+            <h3>Program Elective Class 1</h3>
+            <div>
+                <label for="programDay1">Select Day:</label>
+                <select id="programDay1" name="programDay1">
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
+                </select>
+                <label for="programPeriod1">Select Period:</label>
+                <select id="programPeriod1" name="programPeriod1">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select>
+                <button>Add Program Elective</button>
+            </div>
+
+            <h3>Program Elective Class 2</h3>
+            <div>
+                <label for="programDay2">Select Day:</label>
+                <select id="programDay2" name="programDay2">
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
+                </select>
+                <label for="programPeriod2">Select Period:</label>
+                <select id="programPeriod2" name="programPeriod2">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select>
+                <button>Add Program Elective</button>
+            </div>
+
+            <h3>Program Elective Lab Hour</h3>
+            <div>
+                <label for="programDay3">Select Day:</label>
+                <select id="programDay3" name="programDay3">
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
+                </select>
+                <label for="programPeriod3">Select Period:</label>
+                <select id="programPeriod3" name="programPeriod3">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select>
+                <button>Add Program Elective</button>
+            </div>
+        </div>
+
+        <!-- Output Section -->
+        <div class="output-section">
+            <h2>Generated Timetables</h2>
+            <button onclick="generateTimetables()">Generate Timetables</button>
+            <div id="downloadLinks" style="display: none;">
+                <a id="secondYearDownload" href="#" download="second_year_timetable.xlsx">Download Second Year Timetable</a>
+                <br>
+                <a id="thirdYearDownload" href="#" download="third_year_timetable.xlsx">Download Third Year Timetable</a>
+            </div>
+        </div>
     </div>
-    
-    <div class="container">
-        <h2>Download Timetables</h2>
-        <button>Download First Year Timetable</button>
-        <button>Download Second Year Timetable</button>
-    </div>
-    
+
     <script>
-        document.getElementById('semester').addEventListener('change', function() {
-            let electiveDiv = document.getElementById('electiveOptions');
-            electiveDiv.innerHTML = '';
-            if (this.value === 'even') {
-                electiveDiv.innerHTML = '<label>Global Elective Classes:</label> <input type="text">';
+        // Function to toggle elective options based on semester selection
+        function toggleElectiveOptions() {
+            const semester = document.getElementById('semester').value;
+            const evenSemesterOptions = document.getElementById('evenSemesterOptions');
+            const oddSemesterOptions = document.getElementById('oddSemesterOptions');
+
+            if (semester === 'even') {
+                evenSemesterOptions.classList.remove('hidden');
+                oddSemesterOptions.classList.add('hidden');
             } else {
-                electiveDiv.innerHTML = '<label>Open Elective Classes:</label> <input type="text">';
+                evenSemesterOptions.classList.add('hidden');
+                oddSemesterOptions.classList.remove('hidden');
             }
-        });
+        }
+
+        // Function to simulate generating timetables
+        function generateTimetables() {
+            // Simulate generating timetables
+            alert('Timetables generated successfully!');
+            document.getElementById('downloadLinks').style.display = 'block';
+
+            // Placeholder URLs for download links
+            document.getElementById('secondYearDownload').href = 'data:text/plain;charset=utf-8,Second Year Timetable Data';
+            document.getElementById('thirdYearDownload').href = 'data:text/plain;charset=utf-8,Third Year Timetable Data';
+        }
+
+        // Initialize the elective options based on the default semester selection
+        toggleElectiveOptions();
     </script>
 </body>
 </html>

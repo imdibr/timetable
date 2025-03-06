@@ -1,0 +1,26 @@
+title:christ university timetable generator
+give an option to input only the xlsx file format from local drive
+first heading :second years timetable
+    input the hed class :create two buttons for day(monday to saturday) and period number(from 1-6)
+second heading:third year timetable
+    input the program elective classes
+    period 1:1 period per session
+    period 2:1 period per session
+    lab period:2 periods per session
+    for all the three have two buttons similar as the hed classes
+    input the semester(even or odd)
+    if even:
+        give optiion to enter global elective classes
+        period 1 :2 periods per sessions
+    else odd:
+        give option to enter open elective classes
+        period 1:1 period per session
+        period 2:1 period per session 
+        period 3:1 period per session
+once all these values are input feed the file values (input values including the
+xlsx file and the elective classes values)
+the final output should give an option to download two files:
+    firstyear timetable
+    secondyear timetable
+
+       

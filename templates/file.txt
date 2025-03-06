@@ -7,7 +7,7 @@ function input xlsx file:
 function generate timetable:
     create a 2x2 matrix for all the 9 different sections(2 years so 18 sections)
     the matrix should have days as the row and period number as the column
-
+    
     each matrix should have variable name for each class like 2btcsa for section 2nd year 2 btcs a
 
     for each of the matrix set the fixed values like this 
@@ -35,5 +35,4 @@ function print the xlsx file:
     for each matrix put the 9 sections in one file and the next 9 in the second file
 
 
-rest all handle the flask app createion and the html file connection to index.html
 

@@ -1,0 +1,66 @@
+create timetable for second years:
+    create a sheet in the form of a 2x2 matrix variable for each of the 9 sections 
+    2IT, 2CS A, 2CS B, 2CS C, 2DS, 2IOT, 2CSAIML A, 2CSAIML B, 2CSAIML C
+    get the hed value from the  frontend variable hed_day_var and hed_period_var and append them simultaneously
+    to all the sheets(the 2x2 matrix which we created above)
+    now from the read dataframe values append only those values to matrix variables which have 
+    year name==2 and create the lab slots for them
+    the available lab slots should be randomised first
+    the lab slot should be in this logic in the matrix for each class:
+        append i,j and i,j+1 value to the matrix
+    check for the constraint like this for each of the matrix set the fixed values like this 
+    locked_classes = {
+    "Monday": ["Period 4"],
+    "Tuesday": ["Period 5", "Period 6"],
+    "Friday": ["Period 5", "Period 6"],
+    "Saturday": ["Period 5", "Period 6"],
+    if there is a conflict with the i,j or i,j+1 value tell the user to enter the values again
+    finally for each of the matrix in which the dataframe values are appended according to the class , year and teacher 
+    display them in the rows and columns of the excel sheet and merge all of the 9 matrix variables into a single
+    excel file named second_year_tt
+    give it to the convert_excel function
+
+create timetable for third years:
+    create a sheet in the form of a 2x2 matrix variable for each of the 9 sections 
+    3IT, 3CS A, 3CS B, 3CS C, 3DS, 3IOT, 3CSAIML A, 3CSAIML B, 3CSAIML C
+    get the hed value from the  frontend variables:
+        for program electives(comman for third years):
+            progelec1_day_var:append i,j value in the matrix different day though
+            progelec2_day_var:append i,j value in the matrix different day though
+            progeleclab_day_var:append i,j and i,j+1 in the matrix
+        for open electives(if sem chosen=odd):
+            open_day1_var:append i,j value in the matrix different day though
+            open_day2_var:append i,j value in the matrix different day though
+            open_day3_var:append i,j value in the matrix different day though
+        for global electives(if sem chosen=even):
+            global_day_var:append i,j and i,j+1 in the matrix
+    for each of the elective values the values should be comman among all the 9 different matrix variables
+    and append them simultaneously
+    to all the sheets(the 2x2 matrix which we created above)
+    now from the read dataframe values append only those values to matrix variables which have 
+    year name==3 and create the lab slots for them
+    the available lab slots should be randomised first
+    the lab slot should be in this logic in the matrix for each class:
+        append i,j and i,j+1 value to the matrix
+    check for the constraint like this for each of the matrix set the fixed values like this 
+    locked_classes = {
+    "Monday": ["Period 4"],
+    "Tuesday": ["Period 5", "Period 6"],
+    "Friday": ["Period 5", "Period 6"],
+    "Saturday": ["Period 5", "Period 6"],
+    if there is a conflict with the i,j or i,j+1 value tell the user to enter the values again
+    finally for each of the matrix in which the dataframe values are appended according to the class , year and teacher 
+    display them in the rows and columns of the excel sheet and merge all of the 9 matrix variables into a single
+    excel file named third_year_tt
+    give it to the convert_excel function
+
+read dataframe:
+    read the different colum values like subject name, teacher name, year name,elective class status,section
+    from the dataframe start appending the values to the respective matrix variables to the matrices in the 
+    second year and third year timetable matrix variables
+
+convert_excel:
+    this function converts the matrix variable(sheets in their respective excel sheet
+    into two different excel files:
+        second_yearr_tt
+        third_year_tt
